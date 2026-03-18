@@ -2,22 +2,25 @@
     <div class="chat-header">
         <h2>AI Assistant</h2>
     </div>
-    <div class="chat-messages">
+    <div class="chat-messages" #chatScrollBox>
         @for (msg of messages; track $index) {
-        <div class="message {{ msg.sender }}">
+        <div class="message {{ msg.sender }}" @messageAnimation>
             {{ msg.text }}
         </div>
         }
 
         @if (botIsTyping) {
         <div class="message bot typing">
-            typing...
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         }
     </div>
 
-    <div class="chat-input"><button class="mic-btn">🎤</button>
+    <div class="chat-input">
+        <button class="mic-btn" type="button" (click)="openMic()" [class.active]="micState">🎤</button>
         <input [(ngModel)]="messageText" (keydown.enter)="sendUserMessage()" placeholder="Type your message..." />
-        <button class="send-btn" (click)="sendUserMessage()"> Send </button>
+        <button class="send-btn" type="button" (click)="sendUserMessage()"> Send </button>
     </div>
 </div>
