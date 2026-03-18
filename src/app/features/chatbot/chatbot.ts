@@ -27,9 +27,10 @@ export class Chatbot {
   messages: Message[] = [];
   messageText: string = '';
   botIsTyping: boolean = false;
-  @ViewChild('chatScrollBox') chatScrollBox!: ElementRef;
   speechRec: any;
   micState: boolean = false;
+  @ViewChild('chatScrollBox') chatScrollBox!: ElementRef;
+  @ViewChild('chatInput') chatInput!: ElementRef;
   constructor(private chatbotService: ChatbotService, private cdr: ChangeDetectorRef) { }
 
   sendUserMessage() {
@@ -80,9 +81,13 @@ export class Chatbot {
       console.log('event:', event);
       const voiceText = event.results[0][0].transcript;
       this.messageText = voiceText;
+      this.speechRec.stop();
       console.log('voiceText:', voiceText);
       this.micState = false;
       this.cdr.detectChanges();
+      setTimeout(() => {
+        this.chatInput.nativeElement.focus();
+      });
     };
     this.speechRec.onerror = () => {
       this.micState = false;

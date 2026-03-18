@@ -20,7 +20,8 @@
 
     <div class="chat-input">
         <button class="mic-btn" type="button" (click)="openMic()" [class.active]="micState">🎤</button>
-        <input [(ngModel)]="messageText" (keydown.enter)="sendUserMessage()" placeholder="Type your message..." />
+        <input #chatInput [(ngModel)]="messageText" (keydown.enter)="!micState && sendUserMessage()"
+            placeholder="Type your message..." />
         <button class="send-btn" type="button" (click)="sendUserMessage()"> Send </button>
     </div>
 </div>
