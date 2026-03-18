@@ -3,17 +3,21 @@
         <h2>AI Assistant</h2>
     </div>
     <div class="chat-messages">
-        <div class="message bot">
-            Hello! How can I help you today?
+        @for (msg of messages; track $index) {
+        <div class="message {{ msg.sender }}">
+            {{ msg.text }}
         </div>
-        <div class="message user">
-            Tell me about pricing
+        }
+
+        @if (botIsTyping) {
+        <div class="message bot typing">
+            typing...
         </div>
+        }
     </div>
 
-    <div class="chat-input">
-        <button class="mic-btn">🎤</button>
-        <input type="text" placeholder="Type your message..." />
-        <button class="send-btn"> Send </button>
+    <div class="chat-input"><button class="mic-btn">🎤</button>
+        <input [(ngModel)]="messageText" (keydown.enter)="sendUserMessage()" placeholder="Type your message..." />
+        <button class="send-btn" (click)="sendUserMessage()"> Send </button>
     </div>
 </div>
