@@ -33,5 +33,5 @@ http://localhost:4200
 
 ## 📌 Notes
 
-- This project uses Angular
+- This project uses Angular 21
 - All data is mocked locally
