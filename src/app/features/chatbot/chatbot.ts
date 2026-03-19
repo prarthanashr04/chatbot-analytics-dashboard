@@ -44,7 +44,6 @@ export class Chatbot {
     this.botIsTyping = true;
     setTimeout(() => this.scrollToBottom());
     this.chatbotService.getResponse(message).subscribe(reply => {
-      console.log('reply:', reply);
       this.botIsTyping = false;
       this.messages.push({
         text: reply,
@@ -78,11 +77,9 @@ export class Chatbot {
     this.micState = true;
     this.speechRec.start();
     this.speechRec.onresult = (event: any) => {
-      console.log('event:', event);
       const voiceText = event.results[0][0].transcript;
       this.messageText = voiceText;
       this.speechRec.stop();
-      console.log('voiceText:', voiceText);
       this.micState = false;
       this.cdr.detectChanges();
       setTimeout(() => {

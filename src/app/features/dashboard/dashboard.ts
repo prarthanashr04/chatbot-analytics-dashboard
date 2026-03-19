@@ -11,24 +11,20 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class Dashboard implements OnInit {
   kpiList: KpiItem[] = [];
-
   lineData: any;
   barData: any;
   pieData: any;
-
   selectedRange: 'week' | 'month' | 'year' = 'month';
-
   allRows: TableRow[] = [];
   visibleRows: TableRow[] = [];
-
   searchValue: string = '';
-
   currentPage = 1;
   pageSize = 10;
-
   sortKey: string = '';
   sortOrder: 'asc' | 'desc' = 'asc';
+
   constructor(private dashService: DashboardService) { }
+
   ngOnInit() {
     this.getData();
   }
@@ -67,7 +63,6 @@ export class Dashboard implements OnInit {
 
   onRangeChange(evt: any) {
     const newRange = evt?.target?.value;
-    console.log('range changed ->', newRange);
     this.selectedRange = newRange;
     this.getData();
   }
@@ -94,16 +89,12 @@ export class Dashboard implements OnInit {
     this.visibleRows.sort((a, b) => {
       let val1 = (a as any)[field];
       let val2 = (b as any)[field];
-
       if (val1 == null) val1 = '';
       if (val2 == null) val2 = '';
-
       if (val1 < val2) return this.sortOrder === 'asc' ? -1 : 1;
       if (val1 > val2) return this.sortOrder === 'asc' ? 1 : -1;
-
       return 0;
     });
-
   }
 
   get paginatedRows() {
