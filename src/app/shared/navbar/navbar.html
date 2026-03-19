@@ -4,7 +4,7 @@
     </div>
 
     <div class="nav-links">
-        <a routerLink="/chatbot" routerLinkActive="active">Chatbot</a>
-        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/chatbot" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Chatbot</a>
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
     </div>
 </nav>
